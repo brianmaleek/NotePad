@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -28,19 +27,20 @@ public class NoteListActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            //This will send the Intent that shows our NoteActivity
+            public void onClick(View v) {
+                startActivity(new Intent(NoteListActivity.this, NoteActivity.class));
             }
         });
 
         initializeDisplayContent (); //create a method to hold the list view creation code
+
     }
 
     private void initializeDisplayContent() {
          //Inside the ListView add a list of all the notes. Inorder to do that we need a reference
         // to the ListView. So we'll declare a variable as below:
-        ListView listNotes = findViewById(R.id.list_notes);
+        final ListView listNotes = findViewById(R.id.list_notes);
 
          //Will get the list of notes by declaring a variable of notes of type List with a generic
         // argument of <NoteInfo>. So we can get those notes and put them in an array adapter
@@ -55,6 +55,8 @@ public class NoteListActivity extends AppCompatActivity {
             //handling list view selection that takes you into NoteActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
+//                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+                intent.putExtra(NoteActivity.NOTE_POSITION, position);
                 startActivity(intent);
             }
         });
