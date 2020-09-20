@@ -4,4 +4,6 @@
     <string name="title_activity_note_list">NoteListActivity</string>
     <string name="title_activity_note">Edit Note</string>
     <string name="send_as_email">Send as email</string>
+    <string name="text_course">TextView</string>
+    <string name="text_title">TextView</string>
 </resources>
